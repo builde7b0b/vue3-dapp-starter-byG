@@ -17,12 +17,31 @@ const count = ref(0)
     //START NEW NETWORK PROVIDER CODE
     const web3 = new Web3(new Web3.providers.HttpProvider('https://cronos-testnet.crypto.org:8545'));
 
+    const networkId = 25;
 
+    const chainId = `0x${networkId.toString(16)}`;
 
+    await web3.eth.net.getId()
+        .then((currentNetworkId) => {
+            if (currentNetworkId !== networkId) {
+                throw new Error(`Invalid network ID, expected ${networkId}, got ${currentNetworkId}`);
+            }
+        })
+        .catch((err) => {
+            console.error(`Error getting network ID: ${err}`);
+        });
 
+    await web3.eth.getChainId()
+        .then((currentChainId) => {
+            if (currentChainId !== chainId) {
+                throw new Error(`Invalid chain ID, expected ${chainId}, got ${currentChainId}`);
+            }
+        })
+        .catch((err) => {
+            console.error(`Error getting chain ID: ${err}`);
+        });
 
-    // Initialize web3 and the contract instance
-    const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/c66d5493eff848ca89349923e7d1131a'))
+    
     const myContract = new web3.eth.Contract(tABI, '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D')
 
      async function getContractData() {
