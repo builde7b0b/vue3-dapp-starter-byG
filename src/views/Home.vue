@@ -722,6 +722,8 @@ import { ref } from 'vue'
 
     const myContract = new web3.eth.Contract(tABI, '0x230Bb7ce185CD0042973202f5F38B7072440e2C9')
 
+    const baycContract = new web3.eth.Contract(tABI, '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D')
+
     async function getContractData() {
         const data = await myContract.methods.totalSupply().call()
         console.log(data)
