@@ -13,6 +13,14 @@ import { ref } from 'vue'
 const count = ref(0)
     const add = () => count.value++
 
+
+    //START NEW NETWORK PROVIDER CODE
+    const web3 = new Web3(new Web3.providers.HttpProvider('https://cronos-testnet.crypto.org:8545'));
+
+
+
+
+
     // Initialize web3 and the contract instance
     const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/c66d5493eff848ca89349923e7d1131a'))
     const myContract = new web3.eth.Contract(tABI, '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D')
