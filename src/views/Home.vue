@@ -691,7 +691,7 @@ import { ref } from 'vue'
     ]
 
 
-
+    //UPDATE
     //START NEW NETWORK PROVIDER CODE
     const web3 = new Web3(new Web3.providers.HttpProvider('https://evm.cronos.org/'));
 
