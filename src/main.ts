@@ -35,6 +35,17 @@ app.use(VueDapp, {
 				decimals: 18,
 			},
 		},
+		25: {
+			chainId: ethers.utils.hexValue(25),
+			blockExplorerUrls: ['https://arbiscan.io'],
+			chainName: 'Cronos',
+			rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+			nativeCurrency: {
+				name: 'Cronos',
+				symbol: 'CRO',
+				decimals: 18,
+			},
+		},
 	},
 })
 

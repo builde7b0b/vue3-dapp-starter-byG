@@ -15,7 +15,9 @@
 		"node-stdlib-browser": "^1.2.0",
 		"vue": "^3.2.45",
 		"vue-dapp": "^0.7.1",
-		"vue-router": "4"
+		"vue-router": "4",
+		"web3": "^1.9.0",
+		"web3-core": "^1.9.0"
 	},
 	"devDependencies": {
 		"@rollup/plugin-inject": "^5.0.2",
