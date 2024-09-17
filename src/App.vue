@@ -2,8 +2,9 @@
 import LayoutHeader from './components/LayoutHeader.vue'
 import { MetaMaskConnector, WalletConnectConnector, CoinbaseWalletConnector, SafeConnector, Connector } from 'vue-dapp'
 import { ref, onBeforeMount } from 'vue'
-    import Web3 from 'web3'
-    import MyContractABI from './ABI.json'
+import Web3 from 'web3'
+import MyContractABI from './ABI.json'
+import Home from './views/Home.vue'
 
 const isDev = import.meta.env.DEV
     const infuraId = isDev ? import.meta.env.VITE_INFURA_KEY : 'c66d5493eff848ca89349923e7d1131a'
@@ -57,7 +58,15 @@ const connectErrorHandler = (err: any) => {
 
 <template>
 	<layout-header />
-	<router-view></router-view>
+	<Suspense>
+		<template #default>
+			<router-view></router-view>
+		</template>
+		<template #fallback>
+			<div>Loading...</div>
+		</template>
+	</Suspense>
+	
 	<vd-board v-if="connectorsCreated"
 			  :connectors="connectors"
 			  dark
@@ -65,6 +74,6 @@ const connectErrorHandler = (err: any) => {
 			  :connectErrorHandler="connectErrorHandler" />
 
 	<div>
-		<Home :handleButtonClick="handleButtonClick" />
+		<Home />
 	</div>
 </template>

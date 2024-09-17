@@ -738,10 +738,11 @@ import { ref, onMounted, computed } from 'vue'
     const totalSupply = ref(0)
 
 
-    // getContractData()
+    getContractData()
     onMounted(async () => {
         try {
             totalSupply.value = await myContract.methods.totalSupply().call()
+            console.log(totalSupply.value)
         } catch (error) {
             console.error('Error fetching total supply:', error)
         }
@@ -752,18 +753,60 @@ import { ref, onMounted, computed } from 'vue'
 
 
 <template>
-    <div class="text-center">
-        <h1>Home</h1>
-        <p>Count: {{ count }}</p>
-        <p>Double Count: {{ doubleCount }}</p>
-        <button class="btn" @click="add">Increment</button>
-        
-        <h2>Wallet Info</h2>
-        <p>Address: {{ address }}</p>
-        <p>Balance: {{ balance }}</p>
-        
-        <h2>Contract Info</h2>
-        <p>Total Supply: {{ totalSupply }}</p>
+    <div class="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-white mb-8 text-center animate-fade-in">Web3 Dashboard</h1>
+        <div class="bg-white rounded-lg shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+            <h2 class="text-3xl font-bold text-gray-900">Overview</h2>
+          </div>
+          
+          <div class="p-6 space-y-8">
+            <div class="bg-indigo-50 rounded-lg p-6 transform hover:scale-102 transition-transform duration-300">
+              <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Counter</h3>
+              <div class="flex justify-between items-center">
+                <div>
+                  <p class="text-lg text-gray-700">Count: <span class="font-bold">{{ count }}</span></p>
+                  <p class="text-lg text-gray-700">Double Count: <span class="font-bold">{{ doubleCount }}</span></p>
+                </div>
+                <button @click="add" class="px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105">
+                  Increment
+                </button>
+              </div>
+            </div>
+            
+            <div class="bg-purple-50 rounded-lg p-6 transform hover:scale-102 transition-transform duration-300">
+              <h3 class="text-2xl font-semibold text-purple-700 mb-4">Wallet Info</h3>
+              <p class="text-lg text-gray-700">Address: <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded">{{ address || 'Not connected' }}</span></p>
+              <p class="text-lg text-gray-700 mt-2">Balance: <span class="font-bold">{{ balance || '0' }} ETH</span></p>
+            </div>
+            
+            <div class="bg-green-50 rounded-lg p-6 transform hover:scale-102 transition-transform duration-300">
+              <h3 class="text-2xl font-semibold text-green-700 mb-4">Contract Info</h3>
+              <p class="text-lg text-gray-700">Total Supply: <span class="font-bold">{{ totalSupply }}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-</template>
+  </template>
+  
+  <style scoped>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+  
+  @keyframes scale {
+    from { transform: scale(1); }
+    to { transform: scale(1.02); }
+  }
+  
+  .hover\:scale-102:hover {
+    animation: scale 0.3s ease-in-out forwards;
+  }
+  </style>    

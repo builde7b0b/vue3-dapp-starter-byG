@@ -38,3 +38,18 @@ This project demonstrates a successful migration from Vue 2 to Vue 3, showcasing
 
 ## Conclusion
 This project showcases our capability to successfully migrate complex Vue applications from version 2 to 3, ensuring a smooth transition while leveraging new features and maintaining optimal performance.
+
+
+
+# How To Run
+To run this Vue 3 application using Vite, you can use the following commands:
+To start the development server:
+`npm run dev`
+
+To build the application for production:
+`npm run build`
+
+To preview the production build locally:
+`npm run serve`
+
+This will start the Vite development server, and you should be able to view your application in a web browser, typically at http://localhost:3000 (unless a different port is specified).
