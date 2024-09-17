@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue'
     import MyContractABI from '../ABI.json'
     import Web3 from 'web3'
+    import { useEthers} from 'vue-dapp'
+    const { address, balance } = useEthers()
+
   
  
     import { AbiItem } from 'web3-utils';
@@ -728,9 +731,21 @@ import { ref } from 'vue'
     }
 
     const count = ref(0)
+    const doubleCount = computed(() => count.value * 2)
+
     const add = () => count.value++
 
-    getContractData()
+    const totalSupply = ref(0)
+
+
+    // getContractData()
+    onMounted(async () => {
+        try {
+            totalSupply.value = await myContract.methods.totalSupply().call()
+        } catch (error) {
+            console.error('Error fetching total supply:', error)
+        }
+})
 
 
 </script>
@@ -738,9 +753,17 @@ import { ref } from 'vue'
 
 <template>
     <div class="text-center">
-        <p>Home: {{ count }}</p>
-
-        <button class="btn" @click="add">Count</button>
+        <h1>Home</h1>
+        <p>Count: {{ count }}</p>
+        <p>Double Count: {{ doubleCount }}</p>
+        <button class="btn" @click="add">Increment</button>
         
+        <h2>Wallet Info</h2>
+        <p>Address: {{ address }}</p>
+        <p>Balance: {{ balance }}</p>
+        
+        <h2>Contract Info</h2>
+        <p>Total Supply: {{ totalSupply }}</p>
     </div>
+
 </template>
